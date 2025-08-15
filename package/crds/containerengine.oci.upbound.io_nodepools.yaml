@@ -78,7 +78,8 @@ spec:
                       attached.
                     type: string
                   clusterIdRef:
-                    description: Reference to a Cluster to populate clusterId.
+                    description: Reference to a Cluster in containerengine to populate
+                      clusterId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -112,7 +113,8 @@ spec:
                     - name
                     type: object
                   clusterIdSelector:
-                    description: Selector for a Cluster to populate clusterId.
+                    description: Selector for a Cluster in containerengine to populate
+                      clusterId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -344,7 +346,7 @@ spec:
                           type: array
                           x-kubernetes-list-type: set
                         nsgIdsRefs:
-                          description: References to NetworkSecurityGroup in core
+                          description: References to NetworkSecurityGroup in networking
                             to populate nsgIds.
                           items:
                             description: A Reference to a named object.
@@ -383,7 +385,7 @@ spec:
                           type: array
                         nsgIdsSelector:
                           description: Selector for a list of NetworkSecurityGroup
-                            in core to populate nsgIds.
+                            in networking to populate nsgIds.
                           properties:
                             matchControllerRef:
                               description: |-
@@ -474,8 +476,8 @@ spec:
                                   which to place nodes.
                                 type: string
                               subnetIdRef:
-                                description: Reference to a Subnet in core to populate
-                                  subnetId.
+                                description: Reference to a Subnet in networking to
+                                  populate subnetId.
                                 properties:
                                   name:
                                     description: Name of the referenced object.
@@ -509,8 +511,8 @@ spec:
                                 - name
                                 type: object
                               subnetIdSelector:
-                                description: Selector for a Subnet in core to populate
-                                  subnetId.
+                                description: Selector for a Subnet in networking to
+                                  populate subnetId.
                                 properties:
                                   matchControllerRef:
                                     description: |-
@@ -569,6 +571,8 @@ spec:
                             PT30M'
                           type: string
                         isForceActionAfterGraceDuration:
+                          description: (Updatable) If the node action should be performed
+                            if not all the pods can be evicted in the grace period
                           type: boolean
                         isForceDeleteAfterGraceDuration:
                           description: (Updatable) If the underlying compute instance
@@ -600,12 +604,14 @@ spec:
                     items:
                       properties:
                         cycleModes:
+                          description: (Updatable) An ordered list of cycle modes
+                            that should be performed on the OKE nodes.
                           items:
                             type: string
                           type: array
                         isNodeCyclingEnabled:
-                          description: (Updatable) If nodes in the nodepool will be
-                            cycled to have new changes.
+                          description: (Updatable) If cycling operation should be
+                            performed on the nodes in the node pool.
                           type: boolean
                         maximumSurge:
                           description: (Updatable) Maximum additional new compute
@@ -701,7 +707,8 @@ spec:
                       attached.
                     type: string
                   clusterIdRef:
-                    description: Reference to a Cluster to populate clusterId.
+                    description: Reference to a Cluster in containerengine to populate
+                      clusterId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -735,7 +742,8 @@ spec:
                     - name
                     type: object
                   clusterIdSelector:
-                    description: Selector for a Cluster to populate clusterId.
+                    description: Selector for a Cluster in containerengine to populate
+                      clusterId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -967,7 +975,7 @@ spec:
                           type: array
                           x-kubernetes-list-type: set
                         nsgIdsRefs:
-                          description: References to NetworkSecurityGroup in core
+                          description: References to NetworkSecurityGroup in networking
                             to populate nsgIds.
                           items:
                             description: A Reference to a named object.
@@ -1006,7 +1014,7 @@ spec:
                           type: array
                         nsgIdsSelector:
                           description: Selector for a list of NetworkSecurityGroup
-                            in core to populate nsgIds.
+                            in networking to populate nsgIds.
                           properties:
                             matchControllerRef:
                               description: |-
@@ -1097,8 +1105,8 @@ spec:
                                   which to place nodes.
                                 type: string
                               subnetIdRef:
-                                description: Reference to a Subnet in core to populate
-                                  subnetId.
+                                description: Reference to a Subnet in networking to
+                                  populate subnetId.
                                 properties:
                                   name:
                                     description: Name of the referenced object.
@@ -1132,8 +1140,8 @@ spec:
                                 - name
                                 type: object
                               subnetIdSelector:
-                                description: Selector for a Subnet in core to populate
-                                  subnetId.
+                                description: Selector for a Subnet in networking to
+                                  populate subnetId.
                                 properties:
                                   matchControllerRef:
                                     description: |-
@@ -1192,6 +1200,8 @@ spec:
                             PT30M'
                           type: string
                         isForceActionAfterGraceDuration:
+                          description: (Updatable) If the node action should be performed
+                            if not all the pods can be evicted in the grace period
                           type: boolean
                         isForceDeleteAfterGraceDuration:
                           description: (Updatable) If the underlying compute instance
@@ -1223,12 +1233,14 @@ spec:
                     items:
                       properties:
                         cycleModes:
+                          description: (Updatable) An ordered list of cycle modes
+                            that should be performed on the OKE nodes.
                           items:
                             type: string
                           type: array
                         isNodeCyclingEnabled:
-                          description: (Updatable) If nodes in the nodepool will be
-                            cycled to have new changes.
+                          description: (Updatable) If cycling operation should be
+                            performed on the nodes in the node pool.
                           type: boolean
                         maximumSurge:
                           description: (Updatable) Maximum additional new compute
@@ -1684,6 +1696,8 @@ spec:
                             PT30M'
                           type: string
                         isForceActionAfterGraceDuration:
+                          description: (Updatable) If the node action should be performed
+                            if not all the pods can be evicted in the grace period
                           type: boolean
                         isForceDeleteAfterGraceDuration:
                           description: (Updatable) If the underlying compute instance
@@ -1715,12 +1729,14 @@ spec:
                     items:
                       properties:
                         cycleModes:
+                          description: (Updatable) An ordered list of cycle modes
+                            that should be performed on the OKE nodes.
                           items:
                             type: string
                           type: array
                         isNodeCyclingEnabled:
-                          description: (Updatable) If nodes in the nodepool will be
-                            cycled to have new changes.
+                          description: (Updatable) If cycling operation should be
+                            performed on the nodes in the node pool.
                           type: boolean
                         maximumSurge:
                           description: (Updatable) Maximum additional new compute

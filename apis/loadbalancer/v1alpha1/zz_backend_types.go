@@ -16,14 +16,14 @@ import (
 type BackendInitParameters struct {
 
 	// The name of the backend set to add the backend server to.  Example: example_backend_set
-	// +crossplane:generate:reference:type=BackendSet
+	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/loadbalancer/v1alpha1.BackendSet
 	BackendsetName *string `json:"backendsetName,omitempty" tf:"backendset_name,omitempty"`
 
-	// Reference to a BackendSet to populate backendsetName.
+	// Reference to a BackendSet in loadbalancer to populate backendsetName.
 	// +kubebuilder:validation:Optional
 	BackendsetNameRef *v1.Reference `json:"backendsetNameRef,omitempty" tf:"-"`
 
-	// Selector for a BackendSet to populate backendsetName.
+	// Selector for a BackendSet in loadbalancer to populate backendsetName.
 	// +kubebuilder:validation:Optional
 	BackendsetNameSelector *v1.Selector `json:"backendsetNameSelector,omitempty" tf:"-"`
 
@@ -37,17 +37,18 @@ type BackendInitParameters struct {
 	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
 
 	// The OCID of the load balancer associated with the backend set and servers.
-	// +crossplane:generate:reference:type=LoadBalancer
+	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/loadbalancer/v1alpha1.LoadBalancer
 	LoadBalancerID *string `json:"loadBalancerId,omitempty" tf:"load_balancer_id,omitempty"`
 
-	// Reference to a LoadBalancer to populate loadBalancerId.
+	// Reference to a LoadBalancer in loadbalancer to populate loadBalancerId.
 	// +kubebuilder:validation:Optional
 	LoadBalancerIDRef *v1.Reference `json:"loadBalancerIdRef,omitempty" tf:"-"`
 
-	// Selector for a LoadBalancer to populate loadBalancerId.
+	// Selector for a LoadBalancer in loadbalancer to populate loadBalancerId.
 	// +kubebuilder:validation:Optional
 	LoadBalancerIDSelector *v1.Selector `json:"loadBalancerIdSelector,omitempty" tf:"-"`
 
+	// (Updatable) The maximum number of simultaneous connections the load balancer can make to the backend. If this is not set or set to 0 then the maximum number of simultaneous connections the load balancer can make to the backend is unlimited.
 	MaxConnections *float64 `json:"maxConnections,omitempty" tf:"max_connections,omitempty"`
 
 	// (Updatable) Whether the load balancer should treat this server as offline. Offline servers receive no incoming traffic.  Example: false
@@ -79,6 +80,7 @@ type BackendObservation struct {
 	// The OCID of the load balancer associated with the backend set and servers.
 	LoadBalancerID *string `json:"loadBalancerId,omitempty" tf:"load_balancer_id,omitempty"`
 
+	// (Updatable) The maximum number of simultaneous connections the load balancer can make to the backend. If this is not set or set to 0 then the maximum number of simultaneous connections the load balancer can make to the backend is unlimited.
 	MaxConnections *float64 `json:"maxConnections,omitempty" tf:"max_connections,omitempty"`
 
 	// A read-only field showing the IP address and port that uniquely identify this backend server in the backend set.  Example: 10.0.0.3:8080
@@ -99,15 +101,15 @@ type BackendObservation struct {
 type BackendParameters struct {
 
 	// The name of the backend set to add the backend server to.  Example: example_backend_set
-	// +crossplane:generate:reference:type=BackendSet
+	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/loadbalancer/v1alpha1.BackendSet
 	// +kubebuilder:validation:Optional
 	BackendsetName *string `json:"backendsetName,omitempty" tf:"backendset_name,omitempty"`
 
-	// Reference to a BackendSet to populate backendsetName.
+	// Reference to a BackendSet in loadbalancer to populate backendsetName.
 	// +kubebuilder:validation:Optional
 	BackendsetNameRef *v1.Reference `json:"backendsetNameRef,omitempty" tf:"-"`
 
-	// Selector for a BackendSet to populate backendsetName.
+	// Selector for a BackendSet in loadbalancer to populate backendsetName.
 	// +kubebuilder:validation:Optional
 	BackendsetNameSelector *v1.Selector `json:"backendsetNameSelector,omitempty" tf:"-"`
 
@@ -124,18 +126,19 @@ type BackendParameters struct {
 	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
 
 	// The OCID of the load balancer associated with the backend set and servers.
-	// +crossplane:generate:reference:type=LoadBalancer
+	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/loadbalancer/v1alpha1.LoadBalancer
 	// +kubebuilder:validation:Optional
 	LoadBalancerID *string `json:"loadBalancerId,omitempty" tf:"load_balancer_id,omitempty"`
 
-	// Reference to a LoadBalancer to populate loadBalancerId.
+	// Reference to a LoadBalancer in loadbalancer to populate loadBalancerId.
 	// +kubebuilder:validation:Optional
 	LoadBalancerIDRef *v1.Reference `json:"loadBalancerIdRef,omitempty" tf:"-"`
 
-	// Selector for a LoadBalancer to populate loadBalancerId.
+	// Selector for a LoadBalancer in loadbalancer to populate loadBalancerId.
 	// +kubebuilder:validation:Optional
 	LoadBalancerIDSelector *v1.Selector `json:"loadBalancerIdSelector,omitempty" tf:"-"`
 
+	// (Updatable) The maximum number of simultaneous connections the load balancer can make to the backend. If this is not set or set to 0 then the maximum number of simultaneous connections the load balancer can make to the backend is unlimited.
 	// +kubebuilder:validation:Optional
 	MaxConnections *float64 `json:"maxConnections,omitempty" tf:"max_connections,omitempty"`
 

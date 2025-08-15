@@ -18,10 +18,10 @@ type KeyVersionExternalKeyReferenceDetailsInitParameters struct {
 
 type KeyVersionExternalKeyReferenceDetailsObservation struct {
 
-	// The OCID of the key.
+	// ExternalKeyId refers to the globally unique key Id associated with the key created in external vault in CTM.
 	ExternalKeyID *string `json:"externalKeyId,omitempty" tf:"external_key_id,omitempty"`
 
-	// The OCID of the key version.
+	// Key version ID associated with the external key.
 	ExternalKeyVersionID *string `json:"externalKeyVersionId,omitempty" tf:"external_key_version_id,omitempty"`
 }
 
@@ -30,18 +30,18 @@ type KeyVersionExternalKeyReferenceDetailsParameters struct {
 
 type KeyVersionInitParameters struct {
 
-	// The OCID of the key version.
+	// Key version ID associated with the external key.
 	ExternalKeyVersionID *string `json:"externalKeyVersionId,omitempty" tf:"external_key_version_id,omitempty"`
 
 	// The OCID of the key.
-	// +crossplane:generate:reference:type=Key
+	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/kms/v1alpha1.Key
 	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
 
-	// Reference to a Key to populate keyId.
+	// Reference to a Key in kms to populate keyId.
 	// +kubebuilder:validation:Optional
 	KeyIDRef *v1.Reference `json:"keyIdRef,omitempty" tf:"-"`
 
-	// Selector for a Key to populate keyId.
+	// Selector for a Key in kms to populate keyId.
 	// +kubebuilder:validation:Optional
 	KeyIDSelector *v1.Selector `json:"keyIdSelector,omitempty" tf:"-"`
 
@@ -57,17 +57,19 @@ type KeyVersionObservation struct {
 	// The OCID of the compartment that contains this key version.
 	CompartmentID *string `json:"compartmentId,omitempty" tf:"compartment_id,omitempty"`
 
+	// Key reference data to be returned to the customer as a response.
 	ExternalKeyReferenceDetails []KeyVersionExternalKeyReferenceDetailsObservation `json:"externalKeyReferenceDetails,omitempty" tf:"external_key_reference_details,omitempty"`
 
-	// The OCID of the key version.
+	// Key version ID associated with the external key.
 	ExternalKeyVersionID *string `json:"externalKeyVersionId,omitempty" tf:"external_key_version_id,omitempty"`
 
 	// The OCID of the key version.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// An optional property indicating whether this keyversion is generated from auto rotatation.
 	IsAutoRotated *bool `json:"isAutoRotated,omitempty" tf:"is_auto_rotated,omitempty"`
 
-	// A boolean that will be true when key version is primary, and will be false when key version is a replica from a primary key version.
+	// A Boolean value that indicates whether the KeyVersion belongs to primary Vault or replica Vault.
 	IsPrimary *bool `json:"isPrimary,omitempty" tf:"is_primary,omitempty"`
 
 	// The OCID of the key.
@@ -106,20 +108,20 @@ type KeyVersionObservation struct {
 
 type KeyVersionParameters struct {
 
-	// The OCID of the key version.
+	// Key version ID associated with the external key.
 	// +kubebuilder:validation:Optional
 	ExternalKeyVersionID *string `json:"externalKeyVersionId,omitempty" tf:"external_key_version_id,omitempty"`
 
 	// The OCID of the key.
-	// +crossplane:generate:reference:type=Key
+	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/kms/v1alpha1.Key
 	// +kubebuilder:validation:Optional
 	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
 
-	// Reference to a Key to populate keyId.
+	// Reference to a Key in kms to populate keyId.
 	// +kubebuilder:validation:Optional
 	KeyIDRef *v1.Reference `json:"keyIdRef,omitempty" tf:"-"`
 
-	// Selector for a Key to populate keyId.
+	// Selector for a Key in kms to populate keyId.
 	// +kubebuilder:validation:Optional
 	KeyIDSelector *v1.Selector `json:"keyIdSelector,omitempty" tf:"-"`
 

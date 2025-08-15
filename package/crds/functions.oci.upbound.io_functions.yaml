@@ -78,7 +78,8 @@ spec:
                       to.
                     type: string
                   applicationIdRef:
-                    description: Reference to a Application to populate applicationId.
+                    description: Reference to a Application in functions to populate
+                      applicationId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -112,7 +113,8 @@ spec:
                     - name
                     type: object
                   applicationIdSelector:
-                    description: Selector for a Application to populate applicationId.
+                    description: Selector for a Application in functions to populate
+                      applicationId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -210,7 +212,8 @@ spec:
                     items:
                       properties:
                         count:
-                          description: (Updatable)
+                          description: (Updatable) Configuration specifying a constant
+                            amount of provisioned concurrency.
                           type: number
                         strategy:
                           description: (Updatable) The strategy for provisioned concurrency
@@ -267,7 +270,8 @@ spec:
                       to.
                     type: string
                   applicationIdRef:
-                    description: Reference to a Application to populate applicationId.
+                    description: Reference to a Application in functions to populate
+                      applicationId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -301,7 +305,8 @@ spec:
                     - name
                     type: object
                   applicationIdSelector:
-                    description: Selector for a Application to populate applicationId.
+                    description: Selector for a Application in functions to populate
+                      applicationId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -399,7 +404,8 @@ spec:
                     items:
                       properties:
                         count:
-                          description: (Updatable)
+                          description: (Updatable) Configuration specifying a constant
+                            amount of provisioned concurrency.
                           type: number
                         strategy:
                           description: (Updatable) The strategy for provisioned concurrency
@@ -693,7 +699,8 @@ spec:
                     items:
                       properties:
                         count:
-                          description: (Updatable)
+                          description: (Updatable) Configuration specifying a constant
+                            amount of provisioned concurrency.
                           type: number
                         strategy:
                           description: (Updatable) The strategy for provisioned concurrency
@@ -702,6 +709,9 @@ spec:
                       type: object
                     type: array
                   shape:
+                    description: The processor shape (GENERIC_X86/GENERIC_ARM) on
+                      which to run functions in the application, extracted from the
+                      image manifest.
                     type: string
                   sourceDetails:
                     description: The source details for the Function. The function

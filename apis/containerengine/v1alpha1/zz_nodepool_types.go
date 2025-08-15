@@ -80,15 +80,15 @@ type NodeConfigDetailsInitParameters struct {
 	NodePoolPodNetworkOptionDetails []NodePoolPodNetworkOptionDetailsInitParameters `json:"nodePoolPodNetworkOptionDetails,omitempty" tf:"node_pool_pod_network_option_details,omitempty"`
 
 	// (Updatable) The OCIDs of the Network Security Group(s) to associate nodes for this node pool with. For more information about NSGs, see NetworkSecurityGroup.
-	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/core/v1alpha1.NetworkSecurityGroup
+	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.NetworkSecurityGroup
 	// +listType=set
 	NsgIds []*string `json:"nsgIds,omitempty" tf:"nsg_ids,omitempty"`
 
-	// References to NetworkSecurityGroup in core to populate nsgIds.
+	// References to NetworkSecurityGroup in networking to populate nsgIds.
 	// +kubebuilder:validation:Optional
 	NsgIdsRefs []v1.Reference `json:"nsgIdsRefs,omitempty" tf:"-"`
 
-	// Selector for a list of NetworkSecurityGroup in core to populate nsgIds.
+	// Selector for a list of NetworkSecurityGroup in networking to populate nsgIds.
 	// +kubebuilder:validation:Optional
 	NsgIdsSelector *v1.Selector `json:"nsgIdsSelector,omitempty" tf:"-"`
 
@@ -154,16 +154,16 @@ type NodeConfigDetailsParameters struct {
 	NodePoolPodNetworkOptionDetails []NodePoolPodNetworkOptionDetailsParameters `json:"nodePoolPodNetworkOptionDetails,omitempty" tf:"node_pool_pod_network_option_details,omitempty"`
 
 	// (Updatable) The OCIDs of the Network Security Group(s) to associate nodes for this node pool with. For more information about NSGs, see NetworkSecurityGroup.
-	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/core/v1alpha1.NetworkSecurityGroup
+	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.NetworkSecurityGroup
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	NsgIds []*string `json:"nsgIds,omitempty" tf:"nsg_ids,omitempty"`
 
-	// References to NetworkSecurityGroup in core to populate nsgIds.
+	// References to NetworkSecurityGroup in networking to populate nsgIds.
 	// +kubebuilder:validation:Optional
 	NsgIdsRefs []v1.Reference `json:"nsgIdsRefs,omitempty" tf:"-"`
 
-	// Selector for a list of NetworkSecurityGroup in core to populate nsgIds.
+	// Selector for a list of NetworkSecurityGroup in networking to populate nsgIds.
 	// +kubebuilder:validation:Optional
 	NsgIdsSelector *v1.Selector `json:"nsgIdsSelector,omitempty" tf:"-"`
 
@@ -181,6 +181,7 @@ type NodeEvictionNodePoolSettingsInitParameters struct {
 	// (Updatable) Duration after which OKE will give up eviction of the pods on the node. PT0M will indicate you want to delete the node without cordon and drain. Default PT60M, Min PT0M, Max: PT60M. Format ISO 8601 e.g PT30M
 	EvictionGraceDuration *string `json:"evictionGraceDuration,omitempty" tf:"eviction_grace_duration,omitempty"`
 
+	// (Updatable) If the node action should be performed if not all the pods can be evicted in the grace period
 	IsForceActionAfterGraceDuration *bool `json:"isForceActionAfterGraceDuration,omitempty" tf:"is_force_action_after_grace_duration,omitempty"`
 
 	// (Updatable) If the underlying compute instance should be deleted if you cannot evict all the pods in grace period
@@ -192,6 +193,7 @@ type NodeEvictionNodePoolSettingsObservation struct {
 	// (Updatable) Duration after which OKE will give up eviction of the pods on the node. PT0M will indicate you want to delete the node without cordon and drain. Default PT60M, Min PT0M, Max: PT60M. Format ISO 8601 e.g PT30M
 	EvictionGraceDuration *string `json:"evictionGraceDuration,omitempty" tf:"eviction_grace_duration,omitempty"`
 
+	// (Updatable) If the node action should be performed if not all the pods can be evicted in the grace period
 	IsForceActionAfterGraceDuration *bool `json:"isForceActionAfterGraceDuration,omitempty" tf:"is_force_action_after_grace_duration,omitempty"`
 
 	// (Updatable) If the underlying compute instance should be deleted if you cannot evict all the pods in grace period
@@ -204,6 +206,7 @@ type NodeEvictionNodePoolSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	EvictionGraceDuration *string `json:"evictionGraceDuration,omitempty" tf:"eviction_grace_duration,omitempty"`
 
+	// (Updatable) If the node action should be performed if not all the pods can be evicted in the grace period
 	// +kubebuilder:validation:Optional
 	IsForceActionAfterGraceDuration *bool `json:"isForceActionAfterGraceDuration,omitempty" tf:"is_force_action_after_grace_duration,omitempty"`
 
@@ -213,9 +216,11 @@ type NodeEvictionNodePoolSettingsParameters struct {
 }
 
 type NodePoolCyclingDetailsInitParameters struct {
+
+	// (Updatable) An ordered list of cycle modes that should be performed on the OKE nodes.
 	CycleModes []*string `json:"cycleModes,omitempty" tf:"cycle_modes,omitempty"`
 
-	// (Updatable) If nodes in the nodepool will be cycled to have new changes.
+	// (Updatable) If cycling operation should be performed on the nodes in the node pool.
 	IsNodeCyclingEnabled *bool `json:"isNodeCyclingEnabled,omitempty" tf:"is_node_cycling_enabled,omitempty"`
 
 	// (Updatable) Maximum additional new compute instances that would be temporarily created and added to nodepool during the cycling nodepool process. OKE supports both integer and percentage input. Defaults to 1, Ranges from 0 to Nodepool size or 0% to 100%
@@ -226,9 +231,11 @@ type NodePoolCyclingDetailsInitParameters struct {
 }
 
 type NodePoolCyclingDetailsObservation struct {
+
+	// (Updatable) An ordered list of cycle modes that should be performed on the OKE nodes.
 	CycleModes []*string `json:"cycleModes,omitempty" tf:"cycle_modes,omitempty"`
 
-	// (Updatable) If nodes in the nodepool will be cycled to have new changes.
+	// (Updatable) If cycling operation should be performed on the nodes in the node pool.
 	IsNodeCyclingEnabled *bool `json:"isNodeCyclingEnabled,omitempty" tf:"is_node_cycling_enabled,omitempty"`
 
 	// (Updatable) Maximum additional new compute instances that would be temporarily created and added to nodepool during the cycling nodepool process. OKE supports both integer and percentage input. Defaults to 1, Ranges from 0 to Nodepool size or 0% to 100%
@@ -240,10 +247,11 @@ type NodePoolCyclingDetailsObservation struct {
 
 type NodePoolCyclingDetailsParameters struct {
 
+	// (Updatable) An ordered list of cycle modes that should be performed on the OKE nodes.
 	// +kubebuilder:validation:Optional
 	CycleModes []*string `json:"cycleModes,omitempty" tf:"cycle_modes,omitempty"`
 
-	// (Updatable) If nodes in the nodepool will be cycled to have new changes.
+	// (Updatable) If cycling operation should be performed on the nodes in the node pool.
 	// +kubebuilder:validation:Optional
 	IsNodeCyclingEnabled *bool `json:"isNodeCyclingEnabled,omitempty" tf:"is_node_cycling_enabled,omitempty"`
 
@@ -259,14 +267,14 @@ type NodePoolCyclingDetailsParameters struct {
 type NodePoolInitParameters struct {
 
 	// The OCID of the cluster to which this node pool is attached.
-	// +crossplane:generate:reference:type=Cluster
+	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/containerengine/v1alpha1.Cluster
 	ClusterID *string `json:"clusterId,omitempty" tf:"cluster_id,omitempty"`
 
-	// Reference to a Cluster to populate clusterId.
+	// Reference to a Cluster in containerengine to populate clusterId.
 	// +kubebuilder:validation:Optional
 	ClusterIDRef *v1.Reference `json:"clusterIdRef,omitempty" tf:"-"`
 
-	// Selector for a Cluster to populate clusterId.
+	// Selector for a Cluster in containerengine to populate clusterId.
 	// +kubebuilder:validation:Optional
 	ClusterIDSelector *v1.Selector `json:"clusterIdSelector,omitempty" tf:"-"`
 
@@ -420,15 +428,15 @@ type NodePoolObservation struct {
 type NodePoolParameters struct {
 
 	// The OCID of the cluster to which this node pool is attached.
-	// +crossplane:generate:reference:type=Cluster
+	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/containerengine/v1alpha1.Cluster
 	// +kubebuilder:validation:Optional
 	ClusterID *string `json:"clusterId,omitempty" tf:"cluster_id,omitempty"`
 
-	// Reference to a Cluster to populate clusterId.
+	// Reference to a Cluster in containerengine to populate clusterId.
 	// +kubebuilder:validation:Optional
 	ClusterIDRef *v1.Reference `json:"clusterIdRef,omitempty" tf:"-"`
 
-	// Selector for a Cluster to populate clusterId.
+	// Selector for a Cluster in containerengine to populate clusterId.
 	// +kubebuilder:validation:Optional
 	ClusterIDSelector *v1.Selector `json:"clusterIdSelector,omitempty" tf:"-"`
 
@@ -721,14 +729,14 @@ type PlacementConfigsInitParameters struct {
 	PreemptibleNodeConfig []PreemptibleNodeConfigInitParameters `json:"preemptibleNodeConfig,omitempty" tf:"preemptible_node_config,omitempty"`
 
 	// (Updatable) The OCID of the subnet in which to place nodes.
-	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/core/v1alpha1.Subnet
+	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Subnet
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
-	// Reference to a Subnet in core to populate subnetId.
+	// Reference to a Subnet in networking to populate subnetId.
 	// +kubebuilder:validation:Optional
 	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
 
-	// Selector for a Subnet in core to populate subnetId.
+	// Selector for a Subnet in networking to populate subnetId.
 	// +kubebuilder:validation:Optional
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
@@ -770,15 +778,15 @@ type PlacementConfigsParameters struct {
 	PreemptibleNodeConfig []PreemptibleNodeConfigParameters `json:"preemptibleNodeConfig,omitempty" tf:"preemptible_node_config,omitempty"`
 
 	// (Updatable) The OCID of the subnet in which to place nodes.
-	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/core/v1alpha1.Subnet
+	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Subnet
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
-	// Reference to a Subnet in core to populate subnetId.
+	// Reference to a Subnet in networking to populate subnetId.
 	// +kubebuilder:validation:Optional
 	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
 
-	// Selector for a Subnet in core to populate subnetId.
+	// Selector for a Subnet in networking to populate subnetId.
 	// +kubebuilder:validation:Optional
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 }

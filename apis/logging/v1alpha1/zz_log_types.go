@@ -62,21 +62,21 @@ type LogInitParameters struct {
 	IsEnabled *bool `json:"isEnabled,omitempty" tf:"is_enabled,omitempty"`
 
 	// (Updatable) OCID of a log group to work with.
-	// +crossplane:generate:reference:type=LogGroup
+	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/logging/v1alpha1.LogGroup
 	LogGroupID *string `json:"logGroupId,omitempty" tf:"log_group_id,omitempty"`
 
-	// Reference to a LogGroup to populate logGroupId.
+	// Reference to a LogGroup in logging to populate logGroupId.
 	// +kubebuilder:validation:Optional
 	LogGroupIDRef *v1.Reference `json:"logGroupIdRef,omitempty" tf:"-"`
 
-	// Selector for a LogGroup to populate logGroupId.
+	// Selector for a LogGroup in logging to populate logGroupId.
 	// +kubebuilder:validation:Optional
 	LogGroupIDSelector *v1.Selector `json:"logGroupIdSelector,omitempty" tf:"-"`
 
 	// The logType that the log object is for, whether custom or service.
 	LogType *string `json:"logType,omitempty" tf:"log_type,omitempty"`
 
-	// (Updatable) Log retention duration in 30-day increments (30, 60, 90 and so on).
+	// (Updatable) Log retention duration in 30-day increments (30, 60, 90 and so on until 180).
 	RetentionDuration *float64 `json:"retentionDuration,omitempty" tf:"retention_duration,omitempty"`
 }
 
@@ -111,7 +111,7 @@ type LogObservation struct {
 	// The logType that the log object is for, whether custom or service.
 	LogType *string `json:"logType,omitempty" tf:"log_type,omitempty"`
 
-	// (Updatable) Log retention duration in 30-day increments (30, 60, 90 and so on).
+	// (Updatable) Log retention duration in 30-day increments (30, 60, 90 and so on until 180).
 	RetentionDuration *float64 `json:"retentionDuration,omitempty" tf:"retention_duration,omitempty"`
 
 	// The pipeline state.
@@ -152,15 +152,15 @@ type LogParameters struct {
 	IsEnabled *bool `json:"isEnabled,omitempty" tf:"is_enabled,omitempty"`
 
 	// (Updatable) OCID of a log group to work with.
-	// +crossplane:generate:reference:type=LogGroup
+	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/logging/v1alpha1.LogGroup
 	// +kubebuilder:validation:Optional
 	LogGroupID *string `json:"logGroupId,omitempty" tf:"log_group_id,omitempty"`
 
-	// Reference to a LogGroup to populate logGroupId.
+	// Reference to a LogGroup in logging to populate logGroupId.
 	// +kubebuilder:validation:Optional
 	LogGroupIDRef *v1.Reference `json:"logGroupIdRef,omitempty" tf:"-"`
 
-	// Selector for a LogGroup to populate logGroupId.
+	// Selector for a LogGroup in logging to populate logGroupId.
 	// +kubebuilder:validation:Optional
 	LogGroupIDSelector *v1.Selector `json:"logGroupIdSelector,omitempty" tf:"-"`
 
@@ -168,7 +168,7 @@ type LogParameters struct {
 	// +kubebuilder:validation:Optional
 	LogType *string `json:"logType,omitempty" tf:"log_type,omitempty"`
 
-	// (Updatable) Log retention duration in 30-day increments (30, 60, 90 and so on).
+	// (Updatable) Log retention duration in 30-day increments (30, 60, 90 and so on until 180).
 	// +kubebuilder:validation:Optional
 	RetentionDuration *float64 `json:"retentionDuration,omitempty" tf:"retention_duration,omitempty"`
 }
@@ -178,6 +178,7 @@ type SourceInitParameters struct {
 	// Log object category.
 	Category *string `json:"category,omitempty" tf:"category,omitempty"`
 
+	// (Applicable when source_type=OCISERVICE) (Updatable) Log category parameters are stored here.
 	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
@@ -196,6 +197,7 @@ type SourceObservation struct {
 	// Log object category.
 	Category *string `json:"category,omitempty" tf:"category,omitempty"`
 
+	// (Applicable when source_type=OCISERVICE) (Updatable) Log category parameters are stored here.
 	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
@@ -215,6 +217,7 @@ type SourceParameters struct {
 	// +kubebuilder:validation:Optional
 	Category *string `json:"category" tf:"category,omitempty"`
 
+	// (Applicable when source_type=OCISERVICE) (Updatable) Log category parameters are stored here.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`

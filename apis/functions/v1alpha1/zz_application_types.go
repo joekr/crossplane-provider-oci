@@ -46,29 +46,30 @@ type ApplicationInitParameters struct {
 	ImagePolicyConfig []ImagePolicyConfigInitParameters `json:"imagePolicyConfig,omitempty" tf:"image_policy_config,omitempty"`
 
 	// (Updatable) The OCIDs of the Network Security Groups to add the application to.
-	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/core/v1alpha1.NetworkSecurityGroup
+	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.NetworkSecurityGroup
 	// +listType=set
 	NetworkSecurityGroupIds []*string `json:"networkSecurityGroupIds,omitempty" tf:"network_security_group_ids,omitempty"`
 
-	// References to NetworkSecurityGroup in core to populate networkSecurityGroupIds.
+	// References to NetworkSecurityGroup in networking to populate networkSecurityGroupIds.
 	// +kubebuilder:validation:Optional
 	NetworkSecurityGroupIdsRefs []v1.Reference `json:"networkSecurityGroupIdsRefs,omitempty" tf:"-"`
 
-	// Selector for a list of NetworkSecurityGroup in core to populate networkSecurityGroupIds.
+	// Selector for a list of NetworkSecurityGroup in networking to populate networkSecurityGroupIds.
 	// +kubebuilder:validation:Optional
 	NetworkSecurityGroupIdsSelector *v1.Selector `json:"networkSecurityGroupIdsSelector,omitempty" tf:"-"`
 
+	// Valid values are GENERIC_X86, GENERIC_ARM and GENERIC_X86_ARM. Default is GENERIC_X86. Setting this to GENERIC_X86, will run the functions in the application on X86 processor architecture. Setting this to GENERIC_ARM, will run the functions in the application on ARM processor architecture. When set to GENERIC_X86_ARM, functions in the application are run on either X86 or ARM processor architecture. Accepted values are: GENERIC_X86, GENERIC_ARM, GENERIC_X86_ARM
 	Shape *string `json:"shape,omitempty" tf:"shape,omitempty"`
 
 	// The OCIDs of the subnets in which to run functions in the application.
-	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/core/v1alpha1.Subnet
+	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Subnet
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
-	// References to Subnet in core to populate subnetIds.
+	// References to Subnet in networking to populate subnetIds.
 	// +kubebuilder:validation:Optional
 	SubnetIdsRefs []v1.Reference `json:"subnetIdsRefs,omitempty" tf:"-"`
 
-	// Selector for a list of Subnet in core to populate subnetIds.
+	// Selector for a list of Subnet in networking to populate subnetIds.
 	// +kubebuilder:validation:Optional
 	SubnetIdsSelector *v1.Selector `json:"subnetIdsSelector,omitempty" tf:"-"`
 
@@ -109,6 +110,7 @@ type ApplicationObservation struct {
 	// +listType=set
 	NetworkSecurityGroupIds []*string `json:"networkSecurityGroupIds,omitempty" tf:"network_security_group_ids,omitempty"`
 
+	// Valid values are GENERIC_X86, GENERIC_ARM and GENERIC_X86_ARM. Default is GENERIC_X86. Setting this to GENERIC_X86, will run the functions in the application on X86 processor architecture. Setting this to GENERIC_ARM, will run the functions in the application on ARM processor architecture. When set to GENERIC_X86_ARM, functions in the application are run on either X86 or ARM processor architecture. Accepted values are: GENERIC_X86, GENERIC_ARM, GENERIC_X86_ARM
 	Shape *string `json:"shape,omitempty" tf:"shape,omitempty"`
 
 	// The current state of the application.
@@ -169,32 +171,33 @@ type ApplicationParameters struct {
 	ImagePolicyConfig []ImagePolicyConfigParameters `json:"imagePolicyConfig,omitempty" tf:"image_policy_config,omitempty"`
 
 	// (Updatable) The OCIDs of the Network Security Groups to add the application to.
-	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/core/v1alpha1.NetworkSecurityGroup
+	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.NetworkSecurityGroup
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	NetworkSecurityGroupIds []*string `json:"networkSecurityGroupIds,omitempty" tf:"network_security_group_ids,omitempty"`
 
-	// References to NetworkSecurityGroup in core to populate networkSecurityGroupIds.
+	// References to NetworkSecurityGroup in networking to populate networkSecurityGroupIds.
 	// +kubebuilder:validation:Optional
 	NetworkSecurityGroupIdsRefs []v1.Reference `json:"networkSecurityGroupIdsRefs,omitempty" tf:"-"`
 
-	// Selector for a list of NetworkSecurityGroup in core to populate networkSecurityGroupIds.
+	// Selector for a list of NetworkSecurityGroup in networking to populate networkSecurityGroupIds.
 	// +kubebuilder:validation:Optional
 	NetworkSecurityGroupIdsSelector *v1.Selector `json:"networkSecurityGroupIdsSelector,omitempty" tf:"-"`
 
+	// Valid values are GENERIC_X86, GENERIC_ARM and GENERIC_X86_ARM. Default is GENERIC_X86. Setting this to GENERIC_X86, will run the functions in the application on X86 processor architecture. Setting this to GENERIC_ARM, will run the functions in the application on ARM processor architecture. When set to GENERIC_X86_ARM, functions in the application are run on either X86 or ARM processor architecture. Accepted values are: GENERIC_X86, GENERIC_ARM, GENERIC_X86_ARM
 	// +kubebuilder:validation:Optional
 	Shape *string `json:"shape,omitempty" tf:"shape,omitempty"`
 
 	// The OCIDs of the subnets in which to run functions in the application.
-	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/core/v1alpha1.Subnet
+	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Subnet
 	// +kubebuilder:validation:Optional
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
-	// References to Subnet in core to populate subnetIds.
+	// References to Subnet in networking to populate subnetIds.
 	// +kubebuilder:validation:Optional
 	SubnetIdsRefs []v1.Reference `json:"subnetIdsRefs,omitempty" tf:"-"`
 
-	// Selector for a list of Subnet in core to populate subnetIds.
+	// Selector for a list of Subnet in networking to populate subnetIds.
 	// +kubebuilder:validation:Optional
 	SubnetIdsSelector *v1.Selector `json:"subnetIdsSelector,omitempty" tf:"-"`
 

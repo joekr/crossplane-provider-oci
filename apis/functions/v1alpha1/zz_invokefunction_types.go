@@ -25,14 +25,14 @@ type InvokeFunctionInitParameters struct {
 	FnInvokeType *string `json:"fnInvokeType,omitempty" tf:"fn_invoke_type,omitempty"`
 
 	// The OCID of this function.
-	// +crossplane:generate:reference:type=Function
+	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/functions/v1alpha1.Function
 	FunctionID *string `json:"functionId,omitempty" tf:"function_id,omitempty"`
 
-	// Reference to a Function to populate functionId.
+	// Reference to a Function in functions to populate functionId.
 	// +kubebuilder:validation:Optional
 	FunctionIDRef *v1.Reference `json:"functionIdRef,omitempty" tf:"-"`
 
-	// Selector for a Function to populate functionId.
+	// Selector for a Function in functions to populate functionId.
 	// +kubebuilder:validation:Optional
 	FunctionIDSelector *v1.Selector `json:"functionIdSelector,omitempty" tf:"-"`
 
@@ -45,6 +45,7 @@ type InvokeFunctionInitParameters struct {
 	// The Base64 encoded body of the function invocation. Cannot be defined if invoke_function_body or input_body_source_path is defined. Note: The maximum size of the request is limited. This limit is currently 6MB and the endpoint will not accept requests that are bigger than this limit.
 	InvokeFunctionBodyBase64Encoded *string `json:"invokeFunctionBodyBase64Encoded,omitempty" tf:"invoke_function_body_base64_encoded,omitempty"`
 
+	// Indicates that the request is a dry run, if set to "true". A dry run request does not execute the function.
 	IsDryRun *bool `json:"isDryRun,omitempty" tf:"is_dry_run,omitempty"`
 }
 
@@ -78,6 +79,7 @@ type InvokeFunctionObservation struct {
 	// The Base64 encoded body of the function invocation. Cannot be defined if invoke_function_body or input_body_source_path is defined. Note: The maximum size of the request is limited. This limit is currently 6MB and the endpoint will not accept requests that are bigger than this limit.
 	InvokeFunctionBodyBase64Encoded *string `json:"invokeFunctionBodyBase64Encoded,omitempty" tf:"invoke_function_body_base64_encoded,omitempty"`
 
+	// Indicates that the request is a dry run, if set to "true". A dry run request does not execute the function.
 	IsDryRun *bool `json:"isDryRun,omitempty" tf:"is_dry_run,omitempty"`
 }
 
@@ -96,15 +98,15 @@ type InvokeFunctionParameters struct {
 	FnInvokeType *string `json:"fnInvokeType,omitempty" tf:"fn_invoke_type,omitempty"`
 
 	// The OCID of this function.
-	// +crossplane:generate:reference:type=Function
+	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/functions/v1alpha1.Function
 	// +kubebuilder:validation:Optional
 	FunctionID *string `json:"functionId,omitempty" tf:"function_id,omitempty"`
 
-	// Reference to a Function to populate functionId.
+	// Reference to a Function in functions to populate functionId.
 	// +kubebuilder:validation:Optional
 	FunctionIDRef *v1.Reference `json:"functionIdRef,omitempty" tf:"-"`
 
-	// Selector for a Function to populate functionId.
+	// Selector for a Function in functions to populate functionId.
 	// +kubebuilder:validation:Optional
 	FunctionIDSelector *v1.Selector `json:"functionIdSelector,omitempty" tf:"-"`
 
@@ -120,6 +122,7 @@ type InvokeFunctionParameters struct {
 	// +kubebuilder:validation:Optional
 	InvokeFunctionBodyBase64Encoded *string `json:"invokeFunctionBodyBase64Encoded,omitempty" tf:"invoke_function_body_base64_encoded,omitempty"`
 
+	// Indicates that the request is a dry run, if set to "true". A dry run request does not execute the function.
 	// +kubebuilder:validation:Optional
 	IsDryRun *bool `json:"isDryRun,omitempty" tf:"is_dry_run,omitempty"`
 }
